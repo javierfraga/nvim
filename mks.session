@@ -13,21 +13,26 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +8 init.lua
+badd +10 init.lua
 badd +6 lua/javier/whitespace.lua
 badd +42 lua/javier/options.lua
-badd +11 lua/javier/commands.lua
+badd +10 lua/javier/file-dir-path.lua
 badd +1 lua/javier/functions.lua
 badd +14 lua/javier/cursor-position.lua
 badd +7 lua/javier/buffer-reload.lua
+badd +1 lua/javier/diff-unsaved.lua
 argglobal
 %argdel
 $argadd init.lua
 $argadd lua/javier/whitespace.lua
 $argadd lua/javier/options.lua
-edit init.lua
+edit lua/javier/file-dir-path.lua
 argglobal
-balt lua/javier/buffer-reload.lua
+if bufexists(fnamemodify("lua/javier/file-dir-path.lua", ":p")) | buffer lua/javier/file-dir-path.lua | else | edit lua/javier/file-dir-path.lua | endif
+if &buftype ==# 'terminal'
+  silent file lua/javier/file-dir-path.lua
+endif
+balt init.lua
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -38,12 +43,12 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 6 - ((5 * winheight(0) + 27) / 55)
+let s:l = 9 - ((8 * winheight(0) + 12) / 25)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 6
-normal! 029|
+keepjumps 9
+normal! 0
 lcd ~/.config/nvim
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
