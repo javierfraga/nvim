@@ -13,24 +13,21 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +7 init.lua
+badd +8 init.lua
 badd +6 lua/javier/whitespace.lua
 badd +42 lua/javier/options.lua
 badd +11 lua/javier/commands.lua
 badd +1 lua/javier/functions.lua
-badd +0 lua/javier/cursor-position.lua
+badd +14 lua/javier/cursor-position.lua
+badd +7 lua/javier/buffer-reload.lua
 argglobal
 %argdel
 $argadd init.lua
 $argadd lua/javier/whitespace.lua
 $argadd lua/javier/options.lua
-edit lua/javier/cursor-position.lua
+edit init.lua
 argglobal
-if bufexists(fnamemodify("lua/javier/cursor-position.lua", ":p")) | buffer lua/javier/cursor-position.lua | else | edit lua/javier/cursor-position.lua | endif
-if &buftype ==# 'terminal'
-  silent file lua/javier/cursor-position.lua
-endif
-balt init.lua
+balt lua/javier/buffer-reload.lua
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -41,12 +38,12 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 11 - ((10 * winheight(0) + 27) / 55)
+let s:l = 6 - ((5 * winheight(0) + 27) / 55)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 11
-normal! 0
+keepjumps 6
+normal! 029|
 lcd ~/.config/nvim
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
