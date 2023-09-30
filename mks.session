@@ -13,31 +13,28 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +10 init.lua
+badd +9 init.lua
 badd +6 lua/javier/whitespace.lua
-badd +31 lua/javier/options.lua
-badd +9 lua/javier/file-dir-path.lua
-badd +16 lua/javier/cursor-position.lua
+badd +30 lua/javier/options.lua
+badd +5 lua/javier/file-dir-path.lua
+badd +20 lua/javier/cursor-position.lua
 badd +7 lua/javier/buffer-reload.lua
 badd +1 lua/javier/diff-unsaved.lua
 badd +4 lua/javier/quickfix-remap.lua
-badd +16 lua/javier/keymaps.lua
+badd +59 lua/javier/keymaps.lua
+badd +19 lua/javier/split-window-buffer.lua
 argglobal
 %argdel
 $argadd init.lua
 $argadd lua/javier/whitespace.lua
 $argadd lua/javier/options.lua
-edit lua/javier/keymaps.lua
+edit lua/javier/split-window-buffer.lua
 let s:save_splitbelow = &splitbelow
 let s:save_splitright = &splitright
 set splitbelow splitright
 wincmd _ | wincmd |
 split
 1wincmd k
-wincmd w
-wincmd _ | wincmd |
-vsplit
-1wincmd h
 wincmd w
 let &splitbelow = s:save_splitbelow
 let &splitright = s:save_splitright
@@ -48,17 +45,14 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe '1resize ' . ((&lines * 30 + 31) / 63)
-exe '2resize ' . ((&lines * 29 + 31) / 63)
-exe 'vert 2resize ' . ((&columns * 63 + 63) / 127)
-exe '3resize ' . ((&lines * 29 + 31) / 63)
-exe 'vert 3resize ' . ((&columns * 63 + 63) / 127)
+exe '1resize ' . ((&lines * 37 + 38) / 77)
+exe '2resize ' . ((&lines * 35 + 38) / 77)
 argglobal
-if bufexists(fnamemodify("lua/javier/keymaps.lua", ":p")) | buffer lua/javier/keymaps.lua | else | edit lua/javier/keymaps.lua | endif
+if bufexists(fnamemodify("lua/javier/split-window-buffer.lua", ":p")) | buffer lua/javier/split-window-buffer.lua | else | edit lua/javier/split-window-buffer.lua | endif
 if &buftype ==# 'terminal'
-  silent file lua/javier/keymaps.lua
+  silent file lua/javier/split-window-buffer.lua
 endif
-balt init.lua
+balt lua/javier/options.lua
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -69,20 +63,20 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 60 - ((24 * winheight(0) + 15) / 30)
+let s:l = 20 - ((19 * winheight(0) + 18) / 37)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 60
+keepjumps 20
 normal! 0
 lcd ~/.config/nvim
 wincmd w
 argglobal
-if bufexists(fnamemodify("~/.config/nvim/lua/javier/whitespace.lua", ":p")) | buffer ~/.config/nvim/lua/javier/whitespace.lua | else | edit ~/.config/nvim/lua/javier/whitespace.lua | endif
+if bufexists(fnamemodify("~/.config/nvim/lua/javier/options.lua", ":p")) | buffer ~/.config/nvim/lua/javier/options.lua | else | edit ~/.config/nvim/lua/javier/options.lua | endif
 if &buftype ==# 'terminal'
-  silent file ~/.config/nvim/lua/javier/whitespace.lua
+  silent file ~/.config/nvim/lua/javier/options.lua
 endif
-balt ~/.config/nvim/init.lua
+balt ~/.config/nvim/lua/javier/file-dir-path.lua
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -93,43 +87,17 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 6 - ((5 * winheight(0) + 14) / 29)
+let s:l = 27 - ((9 * winheight(0) + 17) / 35)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 6
-normal! 0
+keepjumps 27
+normal! 086|
 lcd ~/.config/nvim
 wincmd w
-argglobal
-if bufexists(fnamemodify("~/.config/nvim/init.lua", ":p")) | buffer ~/.config/nvim/init.lua | else | edit ~/.config/nvim/init.lua | endif
-if &buftype ==# 'terminal'
-  silent file ~/.config/nvim/init.lua
-endif
-balt ~/.config/nvim/lua/javier/keymaps.lua
-setlocal fdm=manual
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=0
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-silent! normal! zE
-let &fdl = &fdl
-let s:l = 5 - ((4 * winheight(0) + 14) / 29)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 5
-normal! 029|
-lcd ~/.config/nvim
-wincmd w
-exe '1resize ' . ((&lines * 30 + 31) / 63)
-exe '2resize ' . ((&lines * 29 + 31) / 63)
-exe 'vert 2resize ' . ((&columns * 63 + 63) / 127)
-exe '3resize ' . ((&lines * 29 + 31) / 63)
-exe 'vert 3resize ' . ((&columns * 63 + 63) / 127)
+2wincmd w
+exe '1resize ' . ((&lines * 37 + 38) / 77)
+exe '2resize ' . ((&lines * 35 + 38) / 77)
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
@@ -145,7 +113,6 @@ if filereadable(s:sx)
 endif
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
-nohlsearch
 doautoall SessionLoadPost
 unlet SessionLoad
 " vim: set ft=vim :
