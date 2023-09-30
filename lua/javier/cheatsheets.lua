@@ -62,4 +62,6 @@ vim.cmd([[
     \ | echo "3. Open Quickfix List, just to checkout                    :cope[n]"
     \ | echo "4. Make changes from Quickfix List only, e.g.              :cdo %s/Vimcasts\.\zscom/org/ge"
     \ | echo "5. Write Quickfix List only                                :cdo update"
+    \ | echo "6. Clear Quickfix                                          :cex[pr] []"
+    \ | echo "7. Close Quickfix                                          :ccl[ose]"
 ]])
