@@ -52,7 +52,7 @@ vim.cmd([[
 
 vim.cmd([[
   command! -nargs=0 CheatsheetSearchReplace
-    \   echo "1. Open files of interest                                  :args *.txt"
+    \   echo "1. Open files of interest recursively                      :args **/*.txt"
     \ | echo "   OR"
     \ | echo '1. Open files of interest with string                      :grep! "\<pattern\>" . -r'
     \ | echo '1a.Open files in buffers                                   :cfdo e %'
