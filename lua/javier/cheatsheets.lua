@@ -46,12 +46,12 @@ vim.cmd([[
     \ | echo "Open/Restore Sesssion from nvim :so[urce] mks.session"
 ]])
 
----------------------
--- Search and Replace
----------------------
+-----------------------------------
+-- Search and Replace Multiple File
+-----------------------------------
 
 vim.cmd([[
-  command! -nargs=0 CheatsheetSearchReplace
+  command! -nargs=0 CheatsheetSearchReplaceMultiFile
     \   echo "1. Open files of interest recursively                      :args **/*.txt"
     \ | echo "   OR"
     \ | echo '1. Open files of interest with string                      :grep! "\<pattern\>" . -r'
@@ -64,4 +64,61 @@ vim.cmd([[
     \ | echo "5. Write Quickfix List only                                :cdo update"
     \ | echo "6. Clear Quickfix                                          :cex[pr] []"
     \ | echo "7. Close Quickfix                                          :ccl[ose]"
+]])
+
+----------------------------
+-- Search and Replace Basics
+----------------------------
+
+vim.cmd([[
+  command! -nargs=0 CheatsheetSearchReplaceBasics
+    \   echo "Search Replace Current Line Only                   :s/foo/bar/g"
+    \ | echo "Search Replace All Line                            :%s/foo/bar/g"
+    \ | echo "Search Replace Confirm                             :%s/foo/bar/gc"
+    \ | echo "Default Case Sensitive, usually changed in options :set noignorecase"
+    \ | echo "Search Replace Case Insensitive                    :%s/foo/bar/gci"
+    \ | echo "Search Replace Case Sensitive                      :%s/foo/bar/gcI"
+    \ | echo "Search Replace Case Insensitive                    :%s/foo\c/bar/gc"
+    \ | echo "Search Replace Case Sensitive                      :%s/foo\C/bar/gc"
+    \ | echo "Search Replace Retailn Substrings, removes _       :%s/\(\d\)_\(\d\)/\1\2/g"
+    \ | echo "Search Replace Entire Word w Substring Match       :%s/\<\w*substr\w*\>/newword/g"
+]])
+
+----------
+-- Vimdiff
+----------
+
+vim.cmd([[
+  command! -nargs=0 CheatsheetVimdiff
+    \   echo "Open All Folds, normal! zr"
+    \ | echo "Close All Folds, normal! zm"
+    \ | echo "Open Single Fold, normal! zo"
+    \ | echo "Close Single Fold, normal! zc"
+    \ | echo "Next Diff, normal! ]c"
+    \ | echo "Prev Diff, normal! [c"
+    \ | echo "Diff Obtain, normal! do"
+    \ | echo "Diff Put, normal! dp"
+    \ | echo "Rescan for diffs :dif[fupdate]"
+]])
+
+-------------
+-- Word Count
+-------------
+
+vim.cmd([[
+  command! -nargs=0 CheatsheetWordCount
+    \   echo "Copy Full Word Matches in register / normal! *, OR, normal! #"
+    \ | echo "Copy Partial Word Matches in register / normal! g*, OR, normal! g#"
+    \ | echo "Count # of Occurrences :%s,///gn"
+]])
+
+--------------
+-- Spell Check
+--------------
+
+vim.cmd([[
+  command! -nargs=0 CheatsheetSpellCheck
+    \   echo "Set Spell Check: set spell"
+    \ | echo "Turn off Spell Check: set nospell"
+    \ | echo "Spell Check Word, normal! z="
 ]])
