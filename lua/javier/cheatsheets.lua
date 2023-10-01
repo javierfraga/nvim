@@ -133,6 +133,7 @@ vim.cmd([[
 vim.cmd([[
   command! -nargs=0 CheatsheetWindows
     \   echo 'Cycle Thru Windows,                            normal! <C-w>w'
+    \ | echo 'Swap Partial Windows either Left or Bottom,    normal! <C-w>x'
     \ | echo 'Select TopLeft-Most Buffer/Window,             normal! <C-w>t'
     \ | echo 'Select BottomRight-Most Buffer/Window,         normal! <C-w>b'
     \ | echo 'Rotate Partial Windows Clockwise,              normal! <C-w>r'
