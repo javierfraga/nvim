@@ -14,8 +14,8 @@ vim.cmd([[
     \ | echo 'Vsplit Within Left   :lefta[bove]  vs[plit]'
     \ | echo 'Vsplit Within Right  :rightb[elow] vs[plit]'
     \ | echo ' '
-    \ | echo 'Split  Within Bottom, normal! <C-w>s'
-    \ | echo 'Vsplit Within Right , normal! <C-w>v'
+    \ | echo 'Split  Within Bottom, normal! <Ctrl-w>s'
+    \ | echo 'Vsplit Within Right , normal! <Ctrl-w>v'
     \ | echo ' '
     \ | echo 'List All Buffers                    :ls '
     \ | echo 'Specific Buffer Split Within Top    :sb[uffer][N] '
@@ -31,11 +31,23 @@ vim.cmd([[
 
 vim.cmd([[
   command! -nargs=0 CheatsheetFiles
-    \   echo 'Creates new file and saves it     :sav[eas] new_file_name'
-    \ | echo 'Rename file, saveas, del old file :!rm % | bd[elete]'
-    \ | echo 'Creates new empty file            :e[dit] new_file_name'
-    \ | echo 'Open Multiple Files               :n[ext] *.txt'
-    \ | echo 'Return to prev file               :e # OR CTRL+6'
+    \   echo 'Creates new file and saves it               :sav[eas] new_file_name'
+    \ | echo 'Rename file with saveas first, del old file :!rm % | bd[elete]'
+    \ | echo 'Creates new empty file                      :e[dit] new_file_name'
+    \ | echo 'Open Multiple Files                         :n[ext] *.txt'
+    \ | echo 'Return to prev file                         :e # OR CTRL+6'
+]])
+
+--------------------------
+-- Delete Multiple Buffers
+--------------------------
+
+vim.cmd([[
+  command! -nargs=0 CheatsheetDeleteBuffers
+    \   echo '1. Enter buffers with regex         :bd *.xml'
+    \ | echo '2. Expand the regex                 :<Ctrl-a>'
+    \ | echo '3. Enter Commandline mode to refine :<Ctrl-f>'
+    \ | echo 'Use buffer numbers, e.g.            :bd 3 5'
 ]])
 
 ---------------------
@@ -52,7 +64,7 @@ vim.cmd([[
 -----------------------------------
 -- Search and Replace Multiple File
 -----------------------------------
-
+-- reference: http://vimcasts.org/episodes/project-wide-find-and-replace/
 vim.cmd([[
   command! -nargs=0 CheatsheetSearchReplaceMultiFile
     \   echo '1. Open files of interest recursively                      :args **/*.txt'
@@ -62,6 +74,8 @@ vim.cmd([[
     \ | echo '   NEXT'
     \ | echo '2. Vimgrep isolate matching files w string, e.g.(note \zs) :vimgrep /Vimcasts\.\zscom/g ##'
     \ | echo '   Note, this represents entire args                       :##'
+    \ | echo '   Note, use this for buffers                              :bufdo vimgrepadd AND % instead of ##'
+    \ | echo '   Note, // shortcut for word from * or #, e.g.            :bufdo vimgrepadd // %'
     \ | echo '3. Open Quickfix List, just to checkout                    :cope[n]'
     \ | echo '4. Make changes from Quickfix List only, e.g.              :cdo %s/Vimcasts\.\zscom/org/ge'
     \ | echo '5. Write Quickfix List only                                :cdo update'
@@ -83,8 +97,19 @@ vim.cmd([[
     \ | echo 'Search Replace Case Sensitive                      :%s/foo/bar/gcI'
     \ | echo 'Search Replace Case Insensitive                    :%s/foo\c/bar/gc'
     \ | echo 'Search Replace Case Sensitive                      :%s/foo\C/bar/gc'
-    \ | echo 'Search Replace Retail Substrings, removes _        :%s/\(\d\)_\(\d\)/\1\2/g'
+    \ | echo 'Search Replace Reuse Substrings, removes _         :%s/\(\d\)_\(\d\)/\1\2/g'
     \ | echo 'Search Replace Entire Word w Substring Match       :%s/\<\w*substr\w*\>/newword/g'
+    \ | echo 'Delete all empty lines (selection area too)        :g/^$/d'
+]])
+
+---------
+-- Search
+---------
+
+vim.cmd([[
+  command! -nargs=0 CheatsheetSearch
+    \   echo 'Search multiple words :/\vword1|word2|word3'
+    \ | echo 'Search multiple words :/word1\|word2\|word3'
 ]])
 
 ----------
@@ -132,12 +157,40 @@ vim.cmd([[
 
 vim.cmd([[
   command! -nargs=0 CheatsheetWindows
-    \   echo 'Cycle Thru Windows,                            normal! <C-w>w'
-    \ | echo 'Swap Partial Windows either Left or Bottom,    normal! <C-w>x'
-    \ | echo 'Select TopLeft-Most Buffer/Window,             normal! <C-w>t'
-    \ | echo 'Select BottomRight-Most Buffer/Window,         normal! <C-w>b'
-    \ | echo 'Rotate Partial Windows Clockwise,              normal! <C-w>r'
-    \ | echo 'Rotate Partial Windows Counter Clockwise,      normal! <C-w>R'
-    \ | echo 'Move Current Buffer/Window to new Full Window, normal! <C-w>[H|J|K|L]'
+    \   echo 'Cycle Thru Windows,                            normal! <Ctrl-w>w'
+    \ | echo 'Swap Partial Windows either Left or Bottom,    normal! <Ctrl-w>x'
+    \ | echo 'Select TopLeft-Most Buffer/Window,             normal! <Ctrl-w>t'
+    \ | echo 'Select BottomRight-Most Buffer/Window,         normal! <Ctrl-w>b'
+    \ | echo 'Rotate Partial Windows Clockwise,              normal! <Ctrl-w>r'
+    \ | echo 'Rotate Partial Windows Counter Clockwise,      normal! <Ctrl-w>R'
+    \ | echo 'Move Current Buffer/Window to new Full Window, normal! <Ctrl-w>[H|J|K|L]'
 ]])
 
+---------
+-- Stdout
+---------
+
+vim.cmd([[
+  command! -nargs=0 CheatsheetStdout
+    \   echo '1. Redirect stdout                                    :redir @a'
+    \ | echo '2. Execute the command you want to capture the output :g/example/p'
+    \ | echo '3. Stop capturing                                     :redir END'
+    \ | echo '4. Paste register @a in any buffer                    normal! <Ctrl-R> a'
+]])
+
+-----------
+-- Commands
+-----------
+
+vim.cmd([[
+  command! -nargs=0 CheatsheetCommands
+    \   echo 'Command Line Window, help cmdline-window q: OR :<Ctrl-f>'
+    \ | echo 'Goto some byte # in file                          :goto 21490 '
+    \ | echo 'Keep cursor in middle of screen on scroll         :set so=999'
+    \ | echo 'Reset cursor default behavior on scroll           :set so=0'
+    \ | echo 'Set Relative number line #s                      :rnu'
+    \ | echo 'Unset Relative number line #s                    :nornu OR :rnu!'
+    \ | echo 'Enter range from another file after line 100      :100r! sed -n 147,227p /path/foo.c'
+    \ | echo 'Enter individual from another file after line 100 :100r! sed -n 147p,227p /path/foo.c'
+    \ | echo 'Enter stupid ^M character from Windows            normal! <Ctrl-v> <Ctrl-m>'
+]])
