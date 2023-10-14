@@ -104,7 +104,7 @@ vim.cmd([[
     \ | echo ' '
     \ | echo 'Multi File - Grep method (similar to Args)'
     \ | echo '1. Open files of interest with string                      :grep! "\<pattern\>" . -r'
-    \ | echo ' '
+    \ | echo ''
     \ | echo 'Quickfix modifications'
     \ | echo '1. Open Quickfix List, just to checkout                    :cope[n]'
     \ | echo '2. Make changes from each Quickfix List item, e.g.         :cdo s/Vimcasts\.\zscom/org/ge'
@@ -198,12 +198,11 @@ vim.cmd([[
     \ | echo 'Move Current Buffer/Window to new Full Window, normal! <Ctrl-w>[H|J|K|L]'
 ]])
 
----------
--- Stdout
----------
-
+----------------
+-- Stdout, Redir
+----------------
 vim.cmd([[
-  command! -nargs=0 CheatsheetStdout
+  command! -nargs=0 CheatsheetRedir
     \   echo '1. Redirect stdout                                    :redir @a'
     \ | echo '2. Execute the command you want to capture the output :g/example/p'
     \ | echo '3. Stop capturing                                     :redir END'
