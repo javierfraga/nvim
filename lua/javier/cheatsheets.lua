@@ -1,47 +1,28 @@
------------------------------------------
--- Cheatsheet for window/buffer splitting
------------------------------------------
-
+-----------
+-- Commands
+-----------
 vim.cmd([[
-  command! -nargs=0 CheatsheetSplit
-    \   echo 'Split  Full Top    :to[pleft] sp[lit]'
-    \ | echo 'Split  Full Bottom :bo[tright] sp[lit] '
-    \ | echo 'Vsplit Full Left   :to[pleft]  vs[plit]'
-    \ | echo 'Vsplit Full Right  :bo[tright] vs[plit]'
-    \ | echo ' '
-    \ | echo 'Split  Within Top    :abo[veleft]  sp[lit] '
-    \ | echo 'Split  Within Bottom :bel[owright] sp[lit] '
-    \ | echo 'Vsplit Within Left   :lefta[bove]  vs[plit]'
-    \ | echo 'Vsplit Within Right  :rightb[elow] vs[plit]'
-    \ | echo ' '
-    \ | echo 'Split  Within Bottom, normal! <Ctrl-w>s'
-    \ | echo 'Vsplit Within Right , normal! <Ctrl-w>v'
-    \ | echo ' '
-    \ | echo 'List All Buffers                    :ls '
-    \ | echo 'Specific Buffer Split Within Top    :sb[uffer][N] '
-    \ | echo 'Specific Buffer Split Within Bottom :vert[ical] sb[uffer][N] '
-    \ | echo ' '
-    \ | echo 'Open Files with Horizontal Split $nvim -o file1.txt file2.txt'
-    \ | echo 'Open Files with Vertical Split   $nvim -O file1.txt file2.txt'
-]])
-
---------------------------------
--- Cheatsheet for files
---------------------------------
-
-vim.cmd([[
-  command! -nargs=0 CheatsheetFiles
-    \   echo 'Creates new file and saves it               :sav[eas] new_file_name'
-    \ | echo 'Rename file with saveas first, del old file :!rm % | bd[elete]'
-    \ | echo 'Creates new empty file                      :e[dit] new_file_name'
-    \ | echo 'Open Multiple Files                         :n[ext] *.txt'
-    \ | echo 'Return to prev file                         :e # OR CTRL+6'
+  command! -nargs=0 CheatsheetCommands
+    \   echo 'Command Line Window, help cmdline-window          normal! q: OR :<Ctrl-f>'
+    \ | echo '* or # search without the \<\>                    :g* OR g#'
+    \ | echo 'Goto some byte # in file                          :goto 21490 '
+    \ | echo 'Keep cursor in middle of screen on scroll         :set so=999'
+    \ | echo 'Reset cursor default behavior on scroll           :set so=0'
+    \ | echo 'Set Relative number line #s                       :rnu'
+    \ | echo 'Unset Relative number line #s                     :nornu OR :rnu!'
+    \ | echo 'Enter range from another file after line 100      :100r! sed -n 147,227p /path/foo.c'
+    \ | echo 'Enter individual from another file after line 100 :100r! sed -n 147p,227p /path/foo.c'
+    \ | echo 'Creates new file and saves it                     :sav[eas] new_file_name'
+    \ | echo 'Rename file with saveas first, del old file       :!rm % | bd[elete]'
+    \ | echo 'Creates new empty file                            :e[dit] new_file_name'
+    \ | echo 'Open Multiple Files                               :n[ext] *.txt'
+    \ | echo 'Return to prev file                               :e # OR CTRL+6'
+    \ | echo 'Enter stupid ^M character from Windows            normal! <Ctrl-v> <Ctrl-m>'
 ]])
 
 --------------------------
 -- Delete Multiple Buffers
 --------------------------
-
 vim.cmd([[
   command! -nargs=0 CheatsheetDeleteBuffers
     \   echo '1. Enter buffers with regex         :bd *.xml'
@@ -53,7 +34,6 @@ vim.cmd([[
 ---------------------
 -- Make/Open Sessions
 ---------------------
-
 vim.cmd([[
   command! -nargs=0 CheatsheetMksession
     \   echo 'Make a Session                  :mks[ession]! mks.session'
@@ -61,20 +41,18 @@ vim.cmd([[
     \ | echo 'Open/Restore Sesssion from nvim :so[urce] mks.session'
 ]])
 
------------------------------------
--- Search and Replace Multiple File
------------------------------------
--- reference: http://vimcasts.org/episodes/project-wide-find-and-replace/
+---------------
+-- Move Windows
+---------------
 vim.cmd([[
-  command! -nargs=0 CheatsheetSearchReplaceMultiFile
-    \   echo '1. Open files of interest recursively                      :args **/*.txt'
-    \ | echo '2. Vimgrep isolate matching files w string, e.g.(note \zs) :vimgrep Vimcasts\.\zscom/g ##'
-    \ | echo '   Note, this represents entire args                       :##'
-    \ | echo '3. Open Quickfix List, just to checkout                    :cope[n]'
-    \ | echo '4. Make changes from Quickfix List only, e.g.              :cdo s/Vimcasts\.\zscom/org/ge'
-    \ | echo '5. Write Quickfix List only                                :cdo update'
-    \ | echo '6. Clear Quickfix                                          :cex[pr] []'
-    \ | echo '7. Close Quickfix                                          :ccl[ose]'
+  command! -nargs=0 CheatsheetMoveWindows
+    \   echo 'Cycle Thru Windows,                            normal! <Ctrl-w>w'
+    \ | echo 'Swap Partial Windows either Left or Bottom,    normal! <Ctrl-w>x'
+    \ | echo 'Select TopLeft-Most Buffer/Window,             normal! <Ctrl-w>t'
+    \ | echo 'Select BottomRight-Most Buffer/Window,         normal! <Ctrl-w>b'
+    \ | echo 'Rotate Partial Windows Clockwise,              normal! <Ctrl-w>r'
+    \ | echo 'Rotate Partial Windows Counter Clockwise,      normal! <Ctrl-w>R'
+    \ | echo 'Move Current Buffer/Window to new Full Window, normal! <Ctrl-w>[H|J|K|L]'
 ]])
 
 ---------------------
@@ -107,6 +85,7 @@ vim.cmd([[
     \ | echo ''
     \ | echo 'Quickfix modifications'
     \ | echo '1. Open Quickfix List, just to checkout                    :cope[n]'
+    \ | echo '   (Optional) Resize the Quickfix                          :resize <number>'
     \ | echo '2. Make changes from each Quickfix List item, e.g.         :cdo s/Vimcasts\.\zscom/org/ge'
     \ | echo '3. Make changes each file once Quickfix List, e.g.         :cfdo %s/Vimcasts\.\zscom/org/ge'
     \ | echo '4. Write Quickfix List only                                :cdo update'
@@ -114,10 +93,20 @@ vim.cmd([[
     \ | echo '6. Close Quickfix                                          :ccl[ose]'
 ]])
 
+----------------
+-- Stdout, Redir
+----------------
+vim.cmd([[
+  command! -nargs=0 CheatsheetRedir
+    \   echo '1. Redirect stdout                                    :redir @a'
+    \ | echo '2. Execute the command you want to capture the output :g/example/p'
+    \ | echo '3. Stop capturing                                     :redir END'
+    \ | echo '4. Paste register @a in any buffer                    normal! <Ctrl-R> a'
+]])
+
 ----------------------------
 -- Search and Replace Basics
 ----------------------------
-
 vim.cmd([[
   command! -nargs=0 CheatsheetSearchReplaceBasics
     \   echo 'Search Replace Current Line Only                   :s/foo/bar/g'
@@ -136,6 +125,58 @@ vim.cmd([[
     \ | echo 'Search multiple words                              :/word1\|word2\|word3'
 ]])
 
+-----------------------------------
+-- Search and Replace Multiple File
+-----------------------------------
+-- reference: http://vimcasts.org/episodes/project-wide-find-and-replace/
+vim.cmd([[
+  command! -nargs=0 CheatsheetSearchReplaceMultiFile
+    \   echo '1. Open files of interest recursively                      :args **/*.txt'
+    \ | echo '2. Vimgrep isolate matching files w string, e.g.(note \zs) :vimgrep Vimcasts\.\zscom/g ##'
+    \ | echo '   Note, this represents entire args                       :##'
+    \ | echo '3. Open Quickfix List, just to checkout                    :cope[n]'
+    \ | echo '4. Make changes from Quickfix List only, e.g.              :cdo s/Vimcasts\.\zscom/org/ge'
+    \ | echo '5. Write Quickfix List only                                :cdo update'
+    \ | echo '6. Clear Quickfix                                          :cex[pr] []'
+    \ | echo '7. Close Quickfix                                          :ccl[ose]'
+]])
+
+--------------
+-- Spell Check
+--------------
+vim.cmd([[
+  command! -nargs=0 CheatsheetSpellCheck
+    \   echo 'Set Spell Check      :set spell'
+    \ | echo 'Turn off Spell Check :set nospell'
+    \ | echo 'Spell Check Word,    normal! z='
+]])
+
+
+-----------------------------------------
+-- Cheatsheet for window/buffer splitting
+-----------------------------------------
+vim.cmd([[
+  command! -nargs=0 CheatsheetSplit
+    \   echo 'Split  Full Top    :to[pleft] sp[lit]'
+    \ | echo 'Split  Full Bottom :bo[tright] sp[lit] '
+    \ | echo 'Vsplit Full Left   :to[pleft]  vs[plit]'
+    \ | echo 'Vsplit Full Right  :bo[tright] vs[plit]'
+    \ | echo ' '
+    \ | echo 'Split  Within Top    :abo[veleft]  sp[lit] '
+    \ | echo 'Split  Within Bottom :bel[owright] sp[lit] '
+    \ | echo 'Vsplit Within Left   :lefta[bove]  vs[plit]'
+    \ | echo 'Vsplit Within Right  :rightb[elow] vs[plit]'
+    \ | echo ' '
+    \ | echo 'Split  Within Bottom, normal! <Ctrl-w>s'
+    \ | echo 'Vsplit Within Right , normal! <Ctrl-w>v'
+    \ | echo ' '
+    \ | echo 'List All Buffers                    :ls '
+    \ | echo 'Specific Buffer Split Within Top    :sb[uffer][N] '
+    \ | echo 'Specific Buffer Split Within Bottom :vert[ical] sb[uffer][N] '
+    \ | echo ' '
+    \ | echo 'Open Files with Horizontal Split $nvim -o file1.txt file2.txt'
+    \ | echo 'Open Files with Vertical Split   $nvim -O file1.txt file2.txt'
+]])
 ----------
 -- Vimdiff
 ----------
@@ -164,57 +205,3 @@ vim.cmd([[
     \ | echo 'Count # of Occurrences                  :%s///gn OR %s,,,gn'
 ]])
 
---------------
--- Spell Check
---------------
-
-vim.cmd([[
-  command! -nargs=0 CheatsheetSpellCheck
-    \   echo 'Set Spell Check      :set spell'
-    \ | echo 'Turn off Spell Check :set nospell'
-    \ | echo 'Spell Check Word,    normal! z='
-]])
-
----------------
--- Move Windows
----------------
-
-vim.cmd([[
-  command! -nargs=0 CheatsheetWindows
-    \   echo 'Cycle Thru Windows,                            normal! <Ctrl-w>w'
-    \ | echo 'Swap Partial Windows either Left or Bottom,    normal! <Ctrl-w>x'
-    \ | echo 'Select TopLeft-Most Buffer/Window,             normal! <Ctrl-w>t'
-    \ | echo 'Select BottomRight-Most Buffer/Window,         normal! <Ctrl-w>b'
-    \ | echo 'Rotate Partial Windows Clockwise,              normal! <Ctrl-w>r'
-    \ | echo 'Rotate Partial Windows Counter Clockwise,      normal! <Ctrl-w>R'
-    \ | echo 'Move Current Buffer/Window to new Full Window, normal! <Ctrl-w>[H|J|K|L]'
-]])
-
-----------------
--- Stdout, Redir
-----------------
-vim.cmd([[
-  command! -nargs=0 CheatsheetRedir
-    \   echo '1. Redirect stdout                                    :redir @a'
-    \ | echo '2. Execute the command you want to capture the output :g/example/p'
-    \ | echo '3. Stop capturing                                     :redir END'
-    \ | echo '4. Paste register @a in any buffer                    normal! <Ctrl-R> a'
-]])
-
------------
--- Commands
------------
-
-vim.cmd([[
-  command! -nargs=0 CheatsheetCommands
-    \   echo 'Command Line Window, help cmdline-window          normal! q: OR :<Ctrl-f>'
-    \ | echo '* or # search without the \<\>                    :g* OR g#'
-    \ | echo 'Goto some byte # in file                          :goto 21490 '
-    \ | echo 'Keep cursor in middle of screen on scroll         :set so=999'
-    \ | echo 'Reset cursor default behavior on scroll           :set so=0'
-    \ | echo 'Set Relative number line #s                       :rnu'
-    \ | echo 'Unset Relative number line #s                     :nornu OR :rnu!'
-    \ | echo 'Enter range from another file after line 100      :100r! sed -n 147,227p /path/foo.c'
-    \ | echo 'Enter individual from another file after line 100 :100r! sed -n 147p,227p /path/foo.c'
-    \ | echo 'Enter stupid ^M character from Windows            normal! <Ctrl-v> <Ctrl-m>'
-]])
