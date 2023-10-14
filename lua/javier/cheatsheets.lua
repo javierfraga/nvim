@@ -130,18 +130,10 @@ vim.cmd([[
     \ | echo 'Search Replace Case Sensitive                      :%s/foo\C/bar/gc'
     \ | echo 'Search Replace Reuse Substrings, removes _         :%s/\(\d\)_\(\d\)/\1\2/g'
     \ | echo 'Search Replace Entire Word w Substring Match       :%s/\<\w*substr\w*\>/newword/g'
-    \ | echo 'Search Full Word Replace only on postfix          :%s/Vimcasts\.\zscom/org/g'
+    \ | echo 'Search Full Word Replace only on postfix           :%s/Vimcasts\.\zscom/org/g'
     \ | echo 'Delete all empty lines (selection area too)        :g/^$/d'
-]])
-
----------
--- Search
----------
-
-vim.cmd([[
-  command! -nargs=0 CheatsheetSearch
-    \   echo 'Search multiple words :/\vword1|word2|word3'
-    \ | echo 'Search multiple words :/word1\|word2\|word3'
+    \ | echo 'Search multiple words                              :/\vword1|word2|word3'
+    \ | echo 'Search multiple words                              :/word1\|word2\|word3'
 ]])
 
 ----------
@@ -215,13 +207,13 @@ vim.cmd([[
 
 vim.cmd([[
   command! -nargs=0 CheatsheetCommands
-    \   echo 'Command Line Window, help cmdline-window q: OR :<Ctrl-f>'
-    \ | echo '* or # search without the \<\>  :g* OR g#'
+    \   echo 'Command Line Window, help cmdline-window          normal! q: OR :<Ctrl-f>'
+    \ | echo '* or # search without the \<\>                    :g* OR g#'
     \ | echo 'Goto some byte # in file                          :goto 21490 '
     \ | echo 'Keep cursor in middle of screen on scroll         :set so=999'
     \ | echo 'Reset cursor default behavior on scroll           :set so=0'
-    \ | echo 'Set Relative number line #s                      :rnu'
-    \ | echo 'Unset Relative number line #s                    :nornu OR :rnu!'
+    \ | echo 'Set Relative number line #s                       :rnu'
+    \ | echo 'Unset Relative number line #s                     :nornu OR :rnu!'
     \ | echo 'Enter range from another file after line 100      :100r! sed -n 147,227p /path/foo.c'
     \ | echo 'Enter individual from another file after line 100 :100r! sed -n 147p,227p /path/foo.c'
     \ | echo 'Enter stupid ^M character from Windows            normal! <Ctrl-v> <Ctrl-m>'
