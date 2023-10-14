@@ -68,27 +68,50 @@ vim.cmd([[
 vim.cmd([[
   command! -nargs=0 CheatsheetSearchReplaceMultiFile
     \   echo '1. Open files of interest recursively                      :args **/*.txt'
-    \ | echo '   OR'
-    \ | echo '1. Open files of interest with string                      :grep! "\<pattern\>" . -r'
-    \ | echo '1a.(Optional) Open files in buffers                        :cfdo e %'
-    \ | echo '   NEXT'
-    \ | echo '2. Vimgrep isolate matching files w string, e.g.(note \zs) :vimgrep /Vimcasts\.\zscom/g ##'
+    \ | echo '2. Vimgrep isolate matching files w string, e.g.(note \zs) :vimgrep Vimcasts\.\zscom/g ##'
     \ | echo '   Note, this represents entire args                       :##'
-    \ | echo '   OR'
-    \ | echo '2. Vimgrep isolate matching files w string, e.g.(note \zs) :vimgrep Vimcasts\.\zscom **/*.txt'
-    \ | echo '   OR'
-    \ | echo '2. Use only open buffers                                   :bd *'
-    \ | echo '2a.Expand buffers                                          :<Ctrl-a>'
-    \ | echo '2b.Enter Commandline mode                                  :<Ctrl-f>'
-    \ | echo '2c.Change command from bd to                               :vimgrep Vimcasts\.\zscom 1.txt 2.txt'
-    \ | echo '   Note, can use bufdo like this                           :bufdo vimgrepadd AND % instead of ##'
-    \ | echo '   Note, // shortcut for word from * or #, e.g.            :bufdo vimgrepadd // %'
-    \ | echo '   NEXT'
     \ | echo '3. Open Quickfix List, just to checkout                    :cope[n]'
-    \ | echo '4. Make changes from Quickfix List only, e.g.              :cdo %s/Vimcasts\.\zscom/org/ge'
+    \ | echo '4. Make changes from Quickfix List only, e.g.              :cdo s/Vimcasts\.\zscom/org/ge'
     \ | echo '5. Write Quickfix List only                                :cdo update'
     \ | echo '6. Clear Quickfix                                          :cex[pr] []'
     \ | echo '7. Close Quickfix                                          :ccl[ose]'
+]])
+
+---------------------
+-- Quickfix Mode Grep
+---------------------
+vim.cmd([[
+  command! -nargs=0 CheatsheetQuickfix
+    \   echo 'Single File'
+    \ | echo '1. Vimgrep isolate matching files w string, e.g.(note \zs) :vim[grep] regex-string %'
+    \ | echo ' '
+    \ | echo 'Multi File - Args method'
+    \ | echo '1. Open files of interest recursively                      :args **/*.txt'
+    \ | echo '2. Vimgrep isolate matching files w string, e.g.(note \zs) :vim[grep] Vimcasts\.\zscom/g ##'
+    \ | echo '   Note, this represents entire args                       :##'
+    \ | echo '   OR'
+    \ | echo '2. Vimgrep isolate matching files w string, e.g.(note \zs) :vim[grep] Vimcasts\.\zscom **/*.txt'
+    \ | echo ' '
+    \ | echo 'Multi File - Buffer Method 1'
+    \ | echo '1. Use only open buffers                                   :bd *'
+    \ | echo '2. Expand buffers                                          :<Ctrl-a>'
+    \ | echo '   (Optional) Open files in buffers                        :cfdo e %'
+    \ | echo '3. Enter Commandline mode                                  :<Ctrl-f>'
+    \ | echo '4. Change command from bd to                               :vim[grep] Vimcasts\.\zscom 1.txt 2.txt'
+    \ | echo ' '
+    \ | echo 'Multi File - Buffer Method 2, vimgrepadd'
+    \ | echo '1. Note, // shortcut for word from * or #, e.g.            :bufdo vimgrepadd // %'
+    \ | echo ' '
+    \ | echo 'Multi File - Grep method (similar to Args)'
+    \ | echo '1. Open files of interest with string                      :grep! "\<pattern\>" . -r'
+    \ | echo ' '
+    \ | echo 'Quickfix modifications'
+    \ | echo '1. Open Quickfix List, just to checkout                    :cope[n]'
+    \ | echo '2. Make changes from each Quickfix List item, e.g.         :cdo s/Vimcasts\.\zscom/org/ge'
+    \ | echo '3. Make changes each file once Quickfix List, e.g.         :cfdo %s/Vimcasts\.\zscom/org/ge'
+    \ | echo '4. Write Quickfix List only                                :cdo update'
+    \ | echo '5. Clear Quickfix                                          :cex[pr] []'
+    \ | echo '6. Close Quickfix                                          :ccl[ose]'
 ]])
 
 ----------------------------
@@ -146,7 +169,7 @@ vim.cmd([[
   command! -nargs=0 CheatsheetWordCount
     \   echo 'Copy Full Word Matches in register /    normal! *, OR, normal! #'
     \ | echo 'Copy Partial Word Matches in register / normal! g*, OR, normal! g#'
-    \ | echo 'Count # of Occurrences                  :%s,///gn'
+    \ | echo 'Count # of Occurrences                  :%s///gn OR %s,,,gn'
 ]])
 
 --------------
@@ -194,6 +217,7 @@ vim.cmd([[
 vim.cmd([[
   command! -nargs=0 CheatsheetCommands
     \   echo 'Command Line Window, help cmdline-window q: OR :<Ctrl-f>'
+    \ | echo '* or # search without the \<\>  :g* OR g#'
     \ | echo 'Goto some byte # in file                          :goto 21490 '
     \ | echo 'Keep cursor in middle of screen on scroll         :set so=999'
     \ | echo 'Reset cursor default behavior on scroll           :set so=0'
