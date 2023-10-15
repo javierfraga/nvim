@@ -18,6 +18,7 @@ vim.cmd([[
     \ | echo 'Open Multiple Files                               :n[ext] *.txt'
     \ | echo 'Return to prev file                               :e # OR CTRL+6'
     \ | echo 'Enter stupid ^M character from Windows            normal! <Ctrl-v> <Ctrl-m>'
+    \ | echo 'ZZ: a faster way to do :wq                        normal! ZZ'
 ]])
 
 --------------------------
@@ -149,6 +150,10 @@ vim.cmd([[
     \   echo 'Set Spell Check      :set spell'
     \ | echo 'Turn off Spell Check :set nospell'
     \ | echo 'Spell Check Word,    normal! z='
+    \ | echo 'Go to next misspelled word    normal! ]s'
+    \ | echo 'Go to last misspelled word    normal! [s'
+    \ | echo 'Mark a misspelled word as correct    normal! zg'
+    \ | echo 'Mark a good word as misspelled       normal! zw'
 ]])
 
 
