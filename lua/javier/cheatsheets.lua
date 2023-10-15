@@ -1,35 +1,63 @@
------------
--- Commands
------------
+----------
+-- Buffers
+----------
 vim.cmd([[
-  command! -nargs=0 CheatsheetCommands
-    \   echo 'Command Line Window, help cmdline-window          normal! q: OR :<Ctrl-f>'
-    \ | echo '* or # search without the \<\>                    :g* OR g#'
-    \ | echo 'Goto some byte # in file                          :goto 21490 '
-    \ | echo 'Keep cursor in middle of screen on scroll         :set so=999'
-    \ | echo 'Reset cursor default behavior on scroll           :set so=0'
-    \ | echo 'Set Relative number line #s                       :rnu'
-    \ | echo 'Unset Relative number line #s                     :nornu OR :rnu!'
-    \ | echo 'Enter range from another file after line 100      :100r! sed -n 147,227p /path/foo.c'
-    \ | echo 'Enter individual from another file after line 100 :100r! sed -n 147p,227p /path/foo.c'
-    \ | echo 'Creates new file and saves it                     :sav[eas] new_file_name'
-    \ | echo 'Rename file with saveas first, del old file       :!rm % | bd[elete]'
-    \ | echo 'Creates new empty file                            :e[dit] new_file_name'
-    \ | echo 'Open Multiple Files                               :n[ext] *.txt'
-    \ | echo 'Return to prev file                               :e # OR CTRL+6'
-    \ | echo 'Enter stupid ^M character from Windows            normal! <Ctrl-v> <Ctrl-m>'
-    \ | echo 'ZZ: a faster way to do :wq                        normal! ZZ'
+  command! -nargs=0 CheatsheetBuffers
+    \   echo 'list / show available buffers                         :ls (or :buffers)  '
+    \ | echo 'Edit a file in a new buffer                           :e filename        '
+    \ | echo 'go to next buffer                                     :bnext (or :bn)    '
+    \ | echo 'go to previous buffer                                 :bprev (of :bp)    '
+    \ | echo 'unload a buffer (close a file), keeps in memory       :bdelete (or :bd)  '
+    \ | echo 'unload a buffer and deletes it, deletes in memory     :bwipeout (or :bw) '
+    \ | echo 'The number of the buffer to open                      :b [N]             '
+    \ | echo 'opens all available buffers in horizontal split       :ball              '
+    \ | echo 'opens all available buffers in vertical split         :vertical ball     '
+    \ | echo 'close the buffer window                               :q                 '
+    \ | echo 'reads a file from the path to the buffer              :r <file_path>     '
+    \ | echo 'reads the output of the command into buffer           :r !<command>      '
+    \ | echo 'Enter range from another file after line 100          :100r! sed -n 147,227p /path/foo.c'
+    \ | echo 'Enter lines from another file after line 100          :100r! sed -n 147p,227p /path/foo.c'
+    \ | echo 'reads the output of the command (eg: cat) into buffer :.! cat <file_path>'
+    \ | echo 'Creates new file and saves it                         :sav[eas] new_file_name'
+    \ | echo 'Rename file with saveas first, del old file           :!rm % | bd[elete]'
+    \ | echo 'Creates new empty file                                :e[dit] new_file_name'
+    \ | echo 'Open Multiple Files                                   :n[ext] *.txt'
+    \ | echo 'Return to prev file                                   :e # OR CTRL+6'
+    \ | echo 'BufOnly                                               normal! CTRL+W o      '
 ]])
 
 --------------------------
 -- Delete Multiple Buffers
 --------------------------
 vim.cmd([[
-  command! -nargs=0 CheatsheetDeleteBuffers
+  command! -nargs=0 CheatsheetBuffersDelete
     \   echo '1. Enter buffers with regex         :bd *.xml'
     \ | echo '2. Expand the regex                 :<Ctrl-a>'
     \ | echo '3. Enter Commandline mode to refine :<Ctrl-f>'
     \ | echo 'Use buffer numbers, e.g.            :bd 3 5'
+]])
+
+-------------------------
+-- Miscellaneous Commands
+-------------------------
+vim.cmd([[
+  command! -nargs=0 CheatsheetMiscCommands
+    \ | echo '* or # search without the \<\>                    :g* OR g#'
+    \ | echo 'Goto some byte # in file                          :goto 21490 '
+    \ | echo 'Keep cursor in middle of screen on scroll         :set so=999'
+    \ | echo 'Reset cursor default behavior on scroll           :set so=0'
+    \ | echo 'Set Relative number line #s                       :rnu'
+    \ | echo 'Unset Relative number line #s                     :nornu OR :rnu!'
+]])
+
+-----------------------
+-- Miscellaneous Normal
+-----------------------
+vim.cmd([[
+  command! -nargs=0 CheatsheetMiscNormal
+    \   echo 'Command Line Window, help cmdline-window          normal! q: OR :<Ctrl-f>'
+    \ | echo 'Enter stupid ^M character from Windows            normal! <Ctrl-v> <Ctrl-m>'
+    \ | echo 'ZZ: a faster way to do :wq                        normal! ZZ'
 ]])
 
 ---------------------
@@ -98,7 +126,7 @@ vim.cmd([[
 -- Stdout, Redir
 ----------------
 vim.cmd([[
-  command! -nargs=0 CheatsheetRedir
+  command! -nargs=0 CheatsheetRedirStdout
     \   echo '1. Redirect stdout                                    :redir @a'
     \ | echo '2. Execute the command you want to capture the output :g/example/p'
     \ | echo '3. Stop capturing                                     :redir END'
@@ -127,11 +155,11 @@ vim.cmd([[
 ]])
 
 -----------------------------------
--- Search and Replace Multiple File
+-- Search and Replace with Quickfix
 -----------------------------------
 -- reference: http://vimcasts.org/episodes/project-wide-find-and-replace/
 vim.cmd([[
-  command! -nargs=0 CheatsheetSearchReplaceMultiFile
+  command! -nargs=0 CheatsheetSearchReplaceQuickfix
     \   echo '1. Open files of interest recursively                      :args **/*.txt'
     \ | echo '2. Vimgrep isolate matching files w string, e.g.(note \zs) :vimgrep Vimcasts\.\zscom/g ##'
     \ | echo '   Note, this represents entire args                       :##'
@@ -147,11 +175,11 @@ vim.cmd([[
 --------------
 vim.cmd([[
   command! -nargs=0 CheatsheetSpellCheck
-    \   echo 'Set Spell Check      :set spell'
-    \ | echo 'Turn off Spell Check :set nospell'
-    \ | echo 'Spell Check Word,    normal! z='
-    \ | echo 'Go to next misspelled word    normal! ]s'
-    \ | echo 'Go to last misspelled word    normal! [s'
+    \   echo 'Set Spell Check                      :set spell'
+    \ | echo 'Turn off Spell Check                 :set nospell'
+    \ | echo 'Spell Check Word,                    normal! z='
+    \ | echo 'Go to next misspelled word           normal! ]s'
+    \ | echo 'Go to last misspelled word           normal! [s'
     \ | echo 'Mark a misspelled word as correct    normal! zg'
     \ | echo 'Mark a good word as misspelled       normal! zw'
 ]])
@@ -162,7 +190,10 @@ vim.cmd([[
 -----------------------------------------
 vim.cmd([[
   command! -nargs=0 CheatsheetSplit
-    \   echo 'Split  Full Top    :to[pleft] sp[lit]'
+    \   echo 'Split  Within Bottom, normal! <Ctrl-w>s'
+    \ | echo 'Vsplit Within Right , normal! <Ctrl-w>v'
+    \ | echo ' '
+    \ | echo 'Split  Full Top    :to[pleft] sp[lit]'
     \ | echo 'Split  Full Bottom :bo[tright] sp[lit] '
     \ | echo 'Vsplit Full Left   :to[pleft]  vs[plit]'
     \ | echo 'Vsplit Full Right  :bo[tright] vs[plit]'
@@ -172,9 +203,6 @@ vim.cmd([[
     \ | echo 'Vsplit Within Left   :lefta[bove]  vs[plit]'
     \ | echo 'Vsplit Within Right  :rightb[elow] vs[plit]'
     \ | echo ' '
-    \ | echo 'Split  Within Bottom, normal! <Ctrl-w>s'
-    \ | echo 'Vsplit Within Right , normal! <Ctrl-w>v'
-    \ | echo ' '
     \ | echo 'List All Buffers                    :ls '
     \ | echo 'Specific Buffer Split Within Top    :sb[uffer][N] '
     \ | echo 'Specific Buffer Split Within Bottom :vert[ical] sb[uffer][N] '
@@ -182,10 +210,33 @@ vim.cmd([[
     \ | echo 'Open Files with Horizontal Split $nvim -o file1.txt file2.txt'
     \ | echo 'Open Files with Vertical Split   $nvim -O file1.txt file2.txt'
 ]])
+
+-------
+-- Tabs
+-------
+vim.cmd([[
+  command! -nargs=0 CheatsheetTabs
+    \   echo 'opens the file in newtab                                      :tabe filename'
+    \ | echo 'open an empty tab                                             :tabe new     '
+    \ | echo 'list opened tabs                                              :tabs         '
+    \ | echo 'close the active tab                                          :tabc         '
+    \ | echo 'Go to next tab or previous tab                                :tabn and tabp'
+    \ | echo 'Go to the first available tab                                 :tabfirst     '
+    \ | echo 'Go to the last available tab                                  :tablast      '
+    \ | echo 'help for tabs                                                 :help tabpage '
+    \ | echo 'open all txt files in tabs                                    vim -p *.txt  '
+    \ | echo 'go to next tab                                                normal! gt            '
+    \ | echo 'go to previous tab                                            normal! gT            '
+    \ | echo 'go to tab in position i                                       normal! {i}gt         '
+    \ | echo 'Break out current window into a new tabview                   normal! CTRL+W T      '
+    \ | echo 'Close every window in the current tabview but the current one normal! CTRL+W o      '
+    \ | echo 'create a new window in the current tabview                    normal! CTRL+W n      '
+    \ | echo 'Close current window in the current tabview                   normal! CTRL+W c      '
+]])
+
 ----------
 -- Vimdiff
 ----------
-
 vim.cmd([[
   command! -nargs=0 CheatsheetVimdiff
     \   echo 'Open All Folds,   normal! zr'
