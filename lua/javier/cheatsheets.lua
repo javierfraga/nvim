@@ -296,9 +296,9 @@ vim.cmd([[
     \ | echo 'Diff Obtain,                  normal! do'
     \ | echo 'Diff Put,                     normal! dp'
     \ | echo 'Rescan for diffs              :dif[fupdate]'
-    \ | echo 'diff between 2 vsplit windows :windo diffthis'
-    \ | echo 'diff current window with file :diffs, diffsplit {filename}'
-    \ | echo 'turns off diff selection      :diffoff'
+    \ | echo 'diff between 2 vsplit windows :windo difft[his]'
+    \ | echo 'diff current window with file :diffs[plit], diffs[plit] {filename}'
+    \ | echo 'turns off diff selection      :diffo[ff]'
 ]])
 
 ---------------
