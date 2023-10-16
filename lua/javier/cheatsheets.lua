@@ -37,6 +37,49 @@ vim.cmd([[
     \ | echo 'Use buffer numbers, e.g.            :bd 3 5'
 ]])
 
+----------
+-- Folding
+----------
+vim.cmd([[
+  command! -nargs=0 CheatsheetFolding
+    \   echo 'creates a fold from the cursor down # lines normal! zf#j      '
+    \ | echo 'creates a fold from the cursor to string    normal! zf/string '
+    \ | echo 'creates a visual select fold                normal! v{move}zf '
+    \ | echo 'creates a fold from cursor to mark a        normal! zf'a      '
+    \ | echo 'opens a fold at the cursor.                 normal! zo        '
+    \ | echo 'opens all folds at the cursor.              normal! zO        '
+    \ | echo 'Toggles a fold at the cursor.               normal! za        '
+    \ | echo 'closes a fold at the cursor.                normal! zc        '
+    \ | echo 'closes all open folds.                      normal! zM        '
+    \ | echo 'deletes the fold at the cursor.             normal! zd        '
+    \ | echo 'deletes all folds.                          normal! zE        '
+    \ | echo 'moves the cursor to the next fold.          normal! zj        '
+    \ | echo 'moves the cursor to the previous fold.      normal! zk        '
+    \ | echo 'increases the foldlevel by one.             normal! zm        '
+    \ | echo 'decreases the foldlevel by one.             normal! zr        '
+    \ | echo 'all folds open.                             normal! zR        '
+    \ | echo 'move to start of open fold.                 normal! [z        '
+    \ | echo 'move to end of open fold.                   normal! ]z        '
+]])
+
+--------
+-- Marks
+--------
+vim.cmd([[
+  command! -nargs=0 CheatsheetMarks
+    \   echo "Set a marker a at cursor position                             normal! ma        "
+    \ | echo "Set a marker b at current position                            normal! mb        "
+    \ | echo "Move cursor to exact position of the marker you set with ma   normal! `a        "
+    \ | echo "Move cursor to the first character of the line marked with ma normal! 'a        "
+    \ | echo "Delete from current line to line of mark a                    normal! d'a       "
+    \ | echo "Delete from current cursor position to position of mark a     normal! d`a       "
+    \ | echo "Change text from current line to line of mark a               normal! c'a       "
+    \ | echo "Yank text to unnamed buffer from cursor to position of mark a normal! y`a       "
+    \ | echo "List all the current marks                                    :marks 	  "
+    \ | echo "List marks a, b                                               :marks ab "
+    \ | echo "Search and replace test with foo between markers a and        :'a,'bs/test/foo/g"
+]])
+
 -------------------------
 -- Miscellaneous Commands
 -------------------------
@@ -48,6 +91,7 @@ vim.cmd([[
     \ | echo 'Reset cursor default behavior on scroll           :set so=0'
     \ | echo 'Set Relative number line #s                       :rnu'
     \ | echo 'Unset Relative number line #s                     :nornu OR :rnu!'
+    \ | echo 'Edit a remote file via scp: vim scp://balasundaramm@mgmt-bst:22/~/automation/test-file.txt'
 ]])
 
 -----------------------
@@ -55,9 +99,27 @@ vim.cmd([[
 -----------------------
 vim.cmd([[
   command! -nargs=0 CheatsheetMiscNormal
-    \   echo 'Command Line Window, help cmdline-window          normal! q: OR :<Ctrl-f>'
-    \ | echo 'Enter stupid ^M character from Windows            normal! <Ctrl-v> <Ctrl-m>'
-    \ | echo 'ZZ: a faster way to do :wq                        normal! ZZ'
+    \   echo 'Command Line Window, help cmdline-window                   normal! q: OR :<Ctrl-f>'
+    \ | echo 'Enter stupid ^M character from Windows                     normal! <Ctrl-v> <Ctrl-m>'
+    \ | echo 'ZZ: a faster way to do :wq                                 normal! ZZ'
+    \ | echo 'Toggle case of all characters to end of line.              normal! g~$'
+    \ | echo 'Toggle case of the current line (same as V~).              normal! g~~'
+    \ | echo 'switch the current line to upper case                      normal! gUU'
+    \ | echo 'Increment Numners Sequentially                             normal! g<Ctrl-a>'
+    \ | echo 'Repeat last f, t, F, or T command                          normal! ;'
+    \ | echo 'Repeat last f, t, F, or T command in opposite direction    normal! ,'
+    \ | echo 'Shift lines to left                                        normal! <<'
+    \ | echo 'Shift lines to right                                       normal! >>'
+    \ | echo 'Move to beginning of previous sentence.                    normal! ('
+    \ | echo 'Move to beginning of previous paragraph.                   normal! {'
+    \ | echo 'Move forward to the first character on the next line       normal! +'
+    \ | echo 'Move backwards to the first character on the previous line normal! -'
+    \ | echo 'Move up by half a page                                     normal! CTRL+u'
+    \ | echo 'Move down by half a page                                   normal! CTRL+d'
+    \ | echo 'Move up by a page                                          normal! CTRL+b'
+    \ | echo 'Move down by a page                                        normal! CTRL+f'
+    \ | echo 'Search forward for word under cursor                       normal! *     '
+    \ | echo 'Search backwards for word under cursor                     normal! #     '
 ]])
 
 ---------------------
@@ -68,20 +130,6 @@ vim.cmd([[
     \   echo 'Make a Session                  :mks[ession]! mks.session'
     \ | echo 'Open Sesssion from Console      $nvim -S mks.session'
     \ | echo 'Open/Restore Sesssion from nvim :so[urce] mks.session'
-]])
-
----------------
--- Move Windows
----------------
-vim.cmd([[
-  command! -nargs=0 CheatsheetMoveWindows
-    \   echo 'Cycle Thru Windows,                            normal! <Ctrl-w>w'
-    \ | echo 'Swap Partial Windows either Left or Bottom,    normal! <Ctrl-w>x'
-    \ | echo 'Select TopLeft-Most Buffer/Window,             normal! <Ctrl-w>t'
-    \ | echo 'Select BottomRight-Most Buffer/Window,         normal! <Ctrl-w>b'
-    \ | echo 'Rotate Partial Windows Clockwise,              normal! <Ctrl-w>r'
-    \ | echo 'Rotate Partial Windows Counter Clockwise,      normal! <Ctrl-w>R'
-    \ | echo 'Move Current Buffer/Window to new Full Window, normal! <Ctrl-w>[H|J|K|L]'
 ]])
 
 ---------------------
@@ -239,15 +287,46 @@ vim.cmd([[
 ----------
 vim.cmd([[
   command! -nargs=0 CheatsheetVimdiff
-    \   echo 'Open All Folds,   normal! zr'
-    \ | echo 'Close All Folds,  normal! zm'
-    \ | echo 'Open Single Fold, normal! zo'
-    \ | echo 'Close Single Fold,normal! zc'
-    \ | echo 'Next Diff,        normal! ]c'
-    \ | echo 'Prev Diff,        normal! [c'
-    \ | echo 'Diff Obtain,      normal! do'
-    \ | echo 'Diff Put,         normal! dp'
-    \ | echo 'Rescan for diffs  :dif[fupdate]'
+    \   echo 'Open All Folds,               normal! zr'
+    \ | echo 'Close All Folds,              normal! zm'
+    \ | echo 'Open Single Fold,             normal! zo'
+    \ | echo 'Close Single Fold,            normal! zc'
+    \ | echo 'Next Diff,                    normal! ]c'
+    \ | echo 'Prev Diff,                    normal! [c'
+    \ | echo 'Diff Obtain,                  normal! do'
+    \ | echo 'Diff Put,                     normal! dp'
+    \ | echo 'Rescan for diffs              :dif[fupdate]'
+    \ | echo 'diff between 2 vsplit windows :windo diffthis'
+    \ | echo 'diff current window with file :diffs, diffsplit {filename}'
+    \ | echo 'turns off diff selection      :diffoff'
+]])
+
+---------------
+-- Windows Move
+---------------
+vim.cmd([[
+  command! -nargs=0 CheatsheetWindowsMove
+    \   echo 'Cycle Thru Windows,                            normal! <Ctrl-w>w'
+    \ | echo 'Swap Partial Windows either Left or Bottom,    normal! <Ctrl-w>x'
+    \ | echo 'Select TopLeft-Most Buffer/Window,             normal! <Ctrl-w>t'
+    \ | echo 'Select BottomRight-Most Buffer/Window,         normal! <Ctrl-w>b'
+    \ | echo 'Rotate Partial Windows Clockwise,              normal! <Ctrl-w>r'
+    \ | echo 'Rotate Partial Windows Counter Clockwise,      normal! <Ctrl-w>R'
+    \ | echo 'Move Current Buffer/Window to new Full Window, normal! <Ctrl-w>[H|J|K|L]'
+]])
+
+-----------------
+-- Windows Resize
+-----------------
+vim.cmd([[
+  command! -nargs=0 CheatsheetWindowsResize
+    \   echo 'Max out the height of the current split                     normal!  CTRL+w _'
+    \ | echo 'Max out the width of the current split                      normal!  CTRL+w |'
+    \ | echo 'Normalize all split sizes                                   normal!  CTRL+w ='
+    \ | echo 'Incrementally increase the window to the right. CTRL-w 20 > normal!  CTRL+w >'
+    \ | echo 'Incrementally increase the window to the left. CTRL-w 20 <  normal!  CTRL+w <'
+    \ | echo 'Incrementally decrease the window's height. CTRL-w 10 -     normal!  CTRL+w -'
+    \ | echo 'Incrementally increase the window's height. CTRL-w 10 +     normal!  CTRL+w +'
 ]])
 
 -------------
