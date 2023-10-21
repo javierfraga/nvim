@@ -94,6 +94,17 @@ vim.cmd([[
     \ | echo 'Edit a remote file via scp: vim scp://balasundaramm@mgmt-bst:22/~/automation/test-file.txt'
 ]])
 
+-----------
+-- Terminal
+-----------
+vim.cmd([[
+  command! -nargs=0 CheatsheetTerminal
+    \   echo 'Open terminal in current window            :term'
+    \ | echo 'Open terminal in buffer split              :split term://zsh'
+    \ | echo 'Open terminal in buffer vertical split     :vsplit term://htop'
+    \ | echo 'Leave terminal from NORMAL mode            normal! <Ctrl-\><Ctrl-n>'
+]])
+
 -----------------------
 -- Miscellaneous Normal
 -----------------------
