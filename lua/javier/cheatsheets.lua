@@ -338,6 +338,11 @@ vim.cmd([[
     \ | echo 'Incrementally increase the window to the left. CTRL-w 20 <  normal!  CTRL+w <'
     \ | echo 'Incrementally decrease the window's height. CTRL-w 10 -     normal!  CTRL+w -'
     \ | echo 'Incrementally increase the window's height. CTRL-w 10 +     normal!  CTRL+w +'
+    \ | echo 'Resize window up/down                                       :resize <number-of-lines>'
+    \ | echo 'Resize window left/right                                    :resize <number-of-cols>'
+    \ | echo '  Note, find number-of-cols                                 :echo winwidth(0)'
+    \ | echo '  Note, save width                                          :let width=winwidth(0)'
+    \ | echo '  Note, do math                                             :echo width/3'
 ]])
 
 -------------
