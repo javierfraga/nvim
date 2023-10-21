@@ -85,7 +85,7 @@ vim.cmd([[
 -------------------------
 vim.cmd([[
   command! -nargs=0 CheatsheetMiscCommands
-    \ | echo '* or # search without the \<\>                    :g* OR g#'
+    \   echo '* or # search without the \<\>                    :g* OR g#'
     \ | echo 'Goto some byte # in file                          :goto 21490 '
     \ | echo 'Keep cursor in middle of screen on scroll         :set so=999'
     \ | echo 'Reset cursor default behavior on scroll           :set so=0'
