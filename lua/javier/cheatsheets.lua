@@ -79,7 +79,6 @@ vim.cmd([[
     \ | echo "List marks a, b                                               :marks ab "
     \ | echo "Search and replace test with foo between markers a and        :'a,'bs/test/foo/g"
 ]])
-
 -------------------------
 -- Miscellaneous Commands
 -------------------------
@@ -130,6 +129,8 @@ vim.cmd([[
     \ | echo 'Move down by half a page                                   normal! CTRL+d'
     \ | echo 'Move up by a page                                          normal! CTRL+b'
     \ | echo 'Move down by a page                                        normal! CTRL+f'
+    \ | echo 'Move up by one line                                        normal! CTRL+e'
+    \ | echo 'Move down by one line                                      normal! CTRL+y'
     \ | echo 'Search forward for word under cursor                       normal! *     '
     \ | echo 'Search backwards for word under cursor                     normal! #     '
 ]])
