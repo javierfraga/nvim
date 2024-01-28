@@ -14,4 +14,5 @@ require "nvim-configs.quickfix-nav"
 -- Plugins
 -- require "nvim-configs.lazy"
 require "nvim-configs.pack"
-require "nvim-configs.vim-easy-align"
+require "nvim-configs.plugin-settings.vim-easy-align"
+require "nvim-configs.plugin-settings.comment"
