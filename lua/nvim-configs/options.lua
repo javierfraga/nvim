@@ -50,9 +50,13 @@ vim.opt.formatoptions:remove('r')                                               
 vim.opt.formatoptions:remove('o')                                               -- o: Automatically insert the comment leader at the start of a new line in Insert mode when it follows a line that starts with a comment.
 
 vim.api.nvim_set_option("guicursor", "a:-Cursor-blinkwait1-blinkoff1-blinkon1") -- Set blinking cursor
---vim.cmd "set guicursor+=a:-Cursor-blinkwait1-blinkoff1-blinkon1"
 
 vim.opt.iskeyword:append("-") -- Add '-' to the iskeyword option, make words-like-this single words
---vim.cmd [[set iskeyword+=-]]
 
-vim.o.path = vim.o.path .. '**' -- Make 'gf' work for .lua files in .config/nvim
+-- Get the directory of the current file (init.lua)
+local config_dir = vim.fn.fnamemodify(vim.fn.stdpath('config'), ':p')
+-- Append the config directory to the 'path' option avoid adding the same directory multiple times:
+-- Check paths in env var:`set path?`
+if not string.find(vim.o.path, config_dir) then
+  vim.o.path = vim.o.path .. ',' .. config_dir .. '**'
+end
