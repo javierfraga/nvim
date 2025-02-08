@@ -60,3 +60,10 @@ local config_dir = vim.fn.fnamemodify(vim.fn.stdpath('config'), ':p')
 if not string.find(vim.o.path, config_dir) then
   vim.o.path = vim.o.path .. ',' .. config_dir .. '**'
 end
+
+-- Treat .tmpl Files as Shell Scripts
+vim.filetype.add({
+  extension = {
+    tmpl = "sh", -- Treat all .tmpl files as shell scripts
+  },
+})
