@@ -51,7 +51,7 @@ vim.opt.formatoptions:remove('o')                                               
 
 vim.api.nvim_set_option("guicursor", "a:-Cursor-blinkwait1-blinkoff1-blinkon1") -- Set blinking cursor
 
-vim.opt.iskeyword:append("-") -- Add '-' to the iskeyword option, make words-like-this single words
+vim.opt.iskeyword:append("-")                                                   -- Add '-' to the iskeyword option, make words-like-this single words
 
 -- Get the directory of the current file (init.lua)
 local config_dir = vim.fn.fnamemodify(vim.fn.stdpath('config'), ':p')
