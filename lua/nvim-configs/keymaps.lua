@@ -102,6 +102,8 @@ keymap('n', '<C-t>', ':enew<CR>', opts)
 keymap('n', '<C-S-t>', ':e#<CR>', opts)
 keymap('n', '<A-w>', ':x<CR>', opts)
 keymap('n', '<A-b>', ':bd<CR>', opts)
+-- NOTE: can't do Ctrl+m, this conflicts with ENTER!!!
+-- NOTE: must be Alt+m, not Ctrl+m
 -- Move cursor to the middle character of the line with <Alt-m>
 vim.keymap.set('n', '<A-m>', function()
   local line = vim.api.nvim_get_current_line()
