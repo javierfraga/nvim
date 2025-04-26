@@ -10,6 +10,7 @@ require "nvim-configs.file-dir-path"
 require "nvim-configs.keymaps"
 require "nvim-configs.cheatsheets"
 require "nvim-configs.quickfix-nav"
+require "nvim-configs.sessions"
 
 -- Plugins
 -- require "nvim-configs.lazy"
