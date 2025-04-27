@@ -27,8 +27,9 @@ if inside_docker() then
     -- 🔗 After every yank, automatically copy to system clipboard using OSC52
     vim.api.nvim_create_autocmd("TextYankPost", {
       callback = function()
-        if vim.v.event.operator == "y" then
-          osc52.copy_register("+") -- You could use "*" for primary clipboard
+        if vim.v.event.operator == "y" and vim.v.event.regname == "" then
+          -- Only copy if yank used the default register
+          require('osc52').copy_register('"')
         end
       end,
     })
