@@ -58,6 +58,9 @@ keymap('n', '<C-S-t>', ':echo "Ctrl-Shift-t was pressed"<CR>', opts)
 keymap('n', '<A-w>', ':echo "Alt-w was pressed"<CR>', opts)
 keymap('n', '<A-b>', ':echo "Alt-b was pressed"<CR>', opts)
 keymap('n', '<A-m>', ':echo "Alt-m was pressed"<CR>', opts)
+-- Other buffer stuff
+vim.keymap.set({ "n", "i" }, "<C-s>", ":echo 'Ctrl-s was pressed'<CR>", { desc = "Save file" })
+vim.keymap.set({ "n", "i" }, "<A-h>", ":echo 'Alt/Option-h was pressed'<CR>", { desc = "Remove highlight" })
 
 -- Resize with arrows
 keymap("n", "<A-Up>", ":echo 'Alt-Up was pressed'<CR>", opts)
@@ -88,7 +91,7 @@ keymap("n", "<C-S-l>", "<C-w>v", opts)
 -- keymap("n", "<A-Tab>", ":echo 'Alt-Tab pressed'<CR>", opts)
 -- keymap("n", "<A-S-Tab>", ":echo 'Alt-Shift-Tab pressed'<CR>", opts)
 -- Move to beginning of line with <Alt-h>
-keymap('n', '<A-h>', '0', opts)
+-- keymap('n', '<A-h>', '0', opts)
 -- keymap("n", "<A-j>", ":echo 'Alt-j pressed'<CR>", opts)
 -- keymap("n", "<A-k>", ":echo 'Alt-k pressed'<CR>", opts)
 -- Move to end of line with <Alt-l>
@@ -102,6 +105,10 @@ keymap('n', '<C-t>', ':enew<CR>', opts)
 keymap('n', '<C-S-t>', ':e#<CR>', opts)
 keymap('n', '<A-w>', ':x<CR>', opts)
 keymap('n', '<A-b>', ':bd<CR>', opts)
+-- Other buffer stuff
+vim.keymap.set({ "n", "i" }, "<C-s>", ":w<CR>", { desc = "Save file" })
+vim.keymap.set({ "n", "i" }, "<A-h>", ":noh<CR>", { desc = "Remove highlight" })
+
 -- NOTE: can't do Ctrl+m, this conflicts with ENTER!!!
 -- NOTE: must be Alt+m, not Ctrl+m
 -- Move cursor to the middle character of the line with <Alt-m>
